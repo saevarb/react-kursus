@@ -1,0 +1,26 @@
+
+li {
+    font-family: "Montserrat";
+    font-size: 1em !important;
+}
+
+p {
+    margin-top: 16px !important;
+    margin-bottom: 32px !important;
+    font-family: "Montserrat" !important;
+}
+
+.language-jsx {
+    font-family: "Source Code Pro" !important;
+    font-size: 0.8em !important;
+}
+
+.spectacle-content {
+    max-height: unset !important;
+}
+
+textarea {
+    wrap: off !important;
+}
+
+
