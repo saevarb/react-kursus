@@ -9,7 +9,6 @@ import {
   List,
   ListItem,
   Fill,
-  Text,
   Image,
   Appear,
   CodePane,
@@ -22,6 +21,7 @@ import "./App.css";
 
 import graph1 from "./graph1.png";
 import graph2 from "./graph2.png";
+import { Headings, Text, Playground } from "./util";
 
 const start = Date.now();
 
@@ -33,17 +33,36 @@ const HelloWorld = () => {
 render(<HelloWorld/>);
 `;
 
+const testCode1: string = `
+const Hello = (props) => {
+  return <div>Hello, {props.name}!</div>;
+}
+
+const Test = () => {
+  return <div>
+    <Hello name="Steven"/>
+    <Hello name="Trump"/>
+  </div>;
+}
+
+render(<Test/>);
+`;
+
 const examplePreJsx = `
 const HelloWorld = () => {
-  return <div>Hello!</div>;
-};
-`;
+  return <div>
+    Hello!
+  </div>;
+};`;
 
 const examplePostJsx = `
 const HelloWorld = () => {
-  return React.createElement("div", null, "Hello!");
-};
-`;
+  return React.createElement(
+    "div",
+    null,
+    "Hello!"
+  );
+};`;
 
 const HelloWorld = () => {
   return <div>Hello!</div>;
@@ -81,9 +100,7 @@ const App = () => {
         </Heading>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          React
-        </Heading>
+        <Headings heading="React"></Headings>
         <List>
           <Appear>
             <ListItem>Created in 2013 by Facebook</ListItem>
@@ -103,24 +120,15 @@ const App = () => {
         </List>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          React vs others
-        </Heading>
+        <Headings heading="React vs others"></Headings>
         <Image src={graph1}></Image>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          OpenUI5
-        </Heading>
+        <Headings heading="OpenUI5"></Headings>
         <Image src={graph2}></Image>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          Basic React
-        </Heading>
-        <Heading size={6} caps textColor="tertiary">
-          JSX
-        </Heading>
+        <Headings heading="Basic react" subheading="JSX"></Headings>
         <List>
           <ListItem>Components are written in JSX</ListItem>
           <ListItem>Extension of JS</ListItem>
@@ -129,39 +137,31 @@ const App = () => {
         </List>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          Basic React
-        </Heading>
-        <Heading size={6} caps textColor="tertiary">
-          Components
-        </Heading>
-        <Text textColor="secondary">
-          A component is a function that returns HTML
-        </Text>
-        <Appear>
-          <div>
-            <ComponentPlayground
-              code={testCode}
-              previewBackgroundColor="#464646"
-            ></ComponentPlayground>
-          </div>
-        </Appear>
+        <Headings heading="Basic react" subheading="Components"></Headings>
+        <Text>A component is a function that returns HTML</Text>
+        <Playground code={testCode}></Playground>
       </Slide>
       <Slide>
-        <Heading size={5} caps textColor="secondary">
-          Basic React
-        </Heading>
-        <Heading size={6} caps textColor="tertiary">
-          JSX Translation
-        </Heading>
+        <Headings heading="Basic react" subheading="JSX Translation"></Headings>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1, marginRight: "16px" }}>
-            <CodePane source={examplePreJsx}></CodePane>
+            <code className="sample">{examplePreJsx}</code>
           </div>
           <div style={{ flex: 1 }}>
-            <CodePane source={examplePostJsx}></CodePane>
+            <code className="sample">{examplePostJsx}</code>
           </div>
         </div>
+      </Slide>
+      <Slide>
+        <Headings heading="Basic react" subheading="Props"></Headings>
+        <List>
+          <ListItem>Components, like functions, can take arguments</ListItem>
+          <ListItem>In React, they're referred to as props</ListItem>
+        </List>
+      </Slide>
+      <Slide>
+        <Headings heading="Basic react" subheading="Props"></Headings>
+        <Playground code={testCode1} />
       </Slide>
     </Deck>
   );

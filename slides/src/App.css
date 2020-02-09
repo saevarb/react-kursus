@@ -2,12 +2,14 @@
 li {
     font-family: "Montserrat";
     font-size: 1em !important;
+    font-weight: 300 !important;
 }
 
 p {
     margin-top: 16px !important;
     margin-bottom: 32px !important;
     font-family: "Montserrat" !important;
+    font-weight: 300 !important;
 }
 
 .language-jsx {
@@ -21,6 +23,26 @@ p {
 
 textarea {
     wrap: off !important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Roboto" !important;
+    font-weight: 500 !important;
+}
+
+h6 {
+    font-weight: 400 !important;
+}
+
+code.sample {
+    font-family: "Iosevka";
+    font-size: 0.6em;
+    background-color: rgb(42, 39, 52);
+    display: block;
+    word-wrap: break-word;
+    white-space: pre;
+    text-align: left;
+    height: 100%;
 }
 
 

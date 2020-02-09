@@ -1,0 +1,37 @@
+
+* Subjects
+- Tooling
+  - yarn vs npm
+  - create-react-app
+  - webpack
+  - tsc
+- Development setup
+  - node
+  - yarn
+  - VS Code
+  - auto-formatting (prettier)
+  - linting
+  - react dev tools
+  - mobx dev tools
+- JavaScript vs TypeScript
+- TypeScript basics
+  - The TypeScript type system
+  - Type inference
+  - Type narrowing & null-safety
+  - any vs unknown
+  - Generics/more advanced types
+- React
+  - Why React
+  - React vs jQuery
+  - React vs UI5
+  - Basic class components
+  - React life cycle
+  - Immutability
+  - Function components
+  - Hooks
+  - State & side-effect management
+  - mobx
+  - Material UI
+  - CSS in React
+  - Client side routing
+* 
