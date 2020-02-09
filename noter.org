@@ -89,6 +89,8 @@
 - Keeps track of each components dependencies
 - When data changes, components are rerendered
 - Compares result to last result, does minimal work to update
+*** TODO Reconciliation & keys
+    example???
 *** Old-style components
 - React components used to be classes
 - Can still be classes

@@ -1,77 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import {
-  ComponentPlayground,
   Deck,
   Slide,
   Heading,
   SlideSet,
   List,
   ListItem,
-  Fill,
   Image,
   Appear,
-  CodePane,
   S,
 } from "spectacle";
 import * as mobx from "mobx";
 import * as mutils from "mobx-utils";
 import { observer, Observer } from "mobx-react";
+import { Headings, Text, Playground, AppearingList } from "./util";
 import createTheme from "spectacle/lib/themes/default";
+
+// Examples
+import helloWorld from "./examples/hello_world.example";
+import basicProps from "./examples/basic_props.example";
+import childrenExample from "./examples/children.example";
+import preJsxExample from "./examples/pre_jsx.example";
+import postJsxExample from "./examples/post_jsx.example";
+import clickerExample from "./examples/clicker.example";
+
+// CSS
 import "./App.css";
 
+// Images
 import graph1 from "./graph1.png";
 import graph2 from "./graph2.png";
-import { Headings, Text, Playground, AppearingList } from "./util";
-
-const start = Date.now();
-
-const testCode: string = `
-const HelloWorld = () => {
-  return <div>Hello!</div>;
-};
-
-render(<HelloWorld/>);
-`;
-
-const testCode1: string = `
-const Hello = (props) => {
-  return <div>Hello, {props.name}!</div>;
-}
-
-const Test = () => {
-  return <div>
-    <Hello name="Steven"/>
-    <Hello name="Trump"/>
-  </div>;
-}
-
-render(<Test/>);
-`;
-
-const examplePreJsx = `
-const HelloWorld = () => {
-  return <div>
-    Hello!
-  </div>;
-};`;
-
-const examplePostJsx = `
-const HelloWorld = () => {
-  return React.createElement(
-    "div",
-    null,
-    "Hello!"
-  );
-};`;
-
-const HelloWorld = () => {
-  return <div>Hello!</div>;
-};
-
-const Foo = () => (
-  <ComponentPlayground scope={{ observer, mutils, mobx }} code={testCode} />
-);
 
 const theme = createTheme(
   {
@@ -88,31 +47,6 @@ const theme = createTheme(
     },
   },
 );
-
-const IntroSlide = () => {
-  return (
-    <Slide>
-      <Headings heading="React" />
-      <List>
-        <Appear>
-          <ListItem>Created in 2013 by Facebook</ListItem>
-        </Appear>
-        <Appear>
-          <ListItem>Declarative, component-based (vs imperative)</ListItem>
-        </Appear>
-        <Appear>
-          <ListItem>Based on functional programming principles</ListItem>
-        </Appear>
-        <Appear>
-          <ListItem>Cross-platform (browser, mobile, etc)</ListItem>
-        </Appear>
-        <Appear>
-          <ListItem>Extremely popular</ListItem>
-        </Appear>
-      </List>
-    </Slide>
-  );
-};
 
 const TitleSlide = () => (
   <Slide key>
@@ -139,7 +73,16 @@ const App = () => {
   return (
     <Deck transition={["slide"]} theme={theme}>
       <TitleSlide />
-      <IntroSlide />
+      <Slide>
+        <Headings heading="React" />
+        <AppearingList>
+          <ListItem>Created in 2013 by Facebook</ListItem>
+          <ListItem>Declarative, component-based (vs imperative)</ListItem>
+          <ListItem>Based on functional programming principles</ListItem>
+          <ListItem>Cross-platform (browser, mobile, etc)</ListItem>
+          <ListItem>Extremely popular, massive ecosystem</ListItem>
+        </AppearingList>
+      </Slide>
       <PopularitySlides />
       <Slide>
         <Headings heading="Getting started" subheading="Tooling" />
@@ -228,9 +171,7 @@ const App = () => {
           </ListItem>
           <ListItem>
             Open powershell in your project
-            <code className="inline">
-              git clone this-repogit clone this-repo
-            </code>
+            <code className="inline">git clone this-repo</code>
           </ListItem>
         </AppearingList>
       </Slide>
@@ -244,20 +185,21 @@ const App = () => {
             <ListItem>Really just syntactic sugar</ListItem>
           </AppearingList>
         </List>
-      </Slide>
-      <Slide>
-        <Headings heading="Basic react" subheading="Components" />
-        <Text>A component is a function that returns HTML</Text>
-        <Playground code={testCode} />
+
+        <Appear>
+          <div>
+            <Playground code={helloWorld} />
+          </div>
+        </Appear>
       </Slide>
       <Slide>
         <Headings heading="Basic react" subheading="JSX Translation" />
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1, marginRight: "16px" }}>
-            <code className="sample">{examplePreJsx}</code>
+            <code className="sample">{preJsxExample}</code>
           </div>
           <div style={{ flex: 1 }}>
-            <code className="sample">{examplePostJsx}</code>
+            <code className="sample">{postJsxExample}</code>
           </div>
         </div>
       </Slide>
@@ -271,7 +213,7 @@ const App = () => {
       </Slide>
       <Slide>
         <Headings heading="Basic react" subheading="Props" />
-        <Playground code={testCode1} />
+        <Playground code={basicProps} />
       </Slide>
       <Slide>
         <Headings heading="Basic react" subheading="Props" />
@@ -282,9 +224,57 @@ const App = () => {
         </AppearingList>
         <Appear>
           <div>
-            <Playground code="" />
+            <Playground code={childrenExample} />
           </div>
         </Appear>
+      </Slide>
+      <Slide>
+        <Headings heading="Basic react" subheading="Props" />
+        <AppearingList>
+          <ListItem>Components can be interactive too</ListItem>
+          <ListItem>
+            We&apos;ll explain <code className="inline">useState</code> in more
+            detail in a bit
+          </ListItem>
+        </AppearingList>
+        <Playground code={clickerExample} />
+      </Slide>
+      <Slide>
+        <Headings heading="How react works" subheading="Virtual DOM" />
+        <AppearingList>
+          <ListItem>React maintains a virtual DOM</ListItem>
+          <ListItem>Keeps track of each components dependencies</ListItem>
+          <ListItem>When data changes, components are rerendered</ListItem>
+          <ListItem>Virtual DOM is compared, reconciled</ListItem>
+        </AppearingList>
+      </Slide>
+      <Slide>
+        <Headings
+          heading="How react works"
+          subheading="Reconciliation & keys"
+        />
+        <AppearingList>
+          <ListItem>React tries to do minimal work</ListItem>
+          <ListItem>Sometimes needs help to keep track of components</ListItem>
+          <ListItem>
+            When rendering an array of components, we need keys
+          </ListItem>
+          <ListItem>Keys should be unique among siblings</ListItem>
+          <ListItem>Should uniquely identify elements</ListItem>
+          <ListItem>
+            E.g. <code className="inline">user.id</code>, not the array index
+          </ListItem>
+        </AppearingList>
+      </Slide>
+      <Slide>
+        <Headings heading="How react works" subheading="Old-style components" />
+        <AppearingList>
+          <ListItem>Components used to be classes</ListItem>
+          <ListItem>Can still be classes</ListItem>
+          <ListItem>
+            Class components can use special lifecycle methods
+          </ListItem>
+        </AppearingList>
       </Slide>
     </Deck>
   );

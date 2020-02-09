@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ComponentPlayground,
   Deck,
@@ -13,6 +13,10 @@ import {
   Appear,
   CodePane,
 } from "spectacle";
+
+import * as mobx from "mobx";
+import * as mutils from "mobx-utils";
+import { observer } from "mobx-react";
 
 interface HeadingsProps {
   heading: string;
@@ -46,11 +50,21 @@ export interface MyPlaygroundProps {
 
 export const Playground: React.FC<MyPlaygroundProps> = (props) => {
   return (
-    <ComponentPlayground code={props.code} previewBackgroundColor="#464646" />
+    <ComponentPlayground
+      scope={{
+        useState,
+        useEffect,
+        mobx,
+        mutils,
+        observer,
+      }}
+      code={props.code}
+      previewBackgroundColor="#464646"
+    />
   );
 };
 
-export const AppearingList: React.FC = (props) => {
+const AppearingListComponent: React.FC = (props) => {
   return (
     <List>
       {React.Children.map(props.children, (child) => (
@@ -59,3 +73,5 @@ export const AppearingList: React.FC = (props) => {
     </List>
   );
 };
+
+export const AppearingList = List;
