@@ -1,4 +1,7 @@
 
+ul ul {
+    margin-left: 32px;
+}
 li {
     font-family: "Montserrat";
     font-size: 1em !important;
@@ -43,6 +46,16 @@ code.sample {
     white-space: pre;
     text-align: left;
     height: 100%;
+}
+
+code.inline {
+    font-family: "Iosevka";
+    /* font-size: inherit; */
+    font-size: 90%;
+    background-color: rgb(42, 39, 52);
+    border-radius: 8px;
+    padding: 0px 8px;
+    border: 1px solid grey;
 }
 
 

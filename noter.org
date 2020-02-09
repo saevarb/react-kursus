@@ -34,4 +34,93 @@
   - Material UI
   - CSS in React
   - Client side routing
-* 
+* outline
+** React
+- Created by Facebook in 2013
+- Declarative, component-based (vs imperative)
+- Based on functional programming principles
+- Cross-platform
+- Popular
+** Getting started
+*** Tooling
+- JavaScript tooling is notoriously confusing
+- There are a lot of choices
+- yarn, npm, npx, node, gulp, parcel, webpack, babel, tsc, tslint, eslint, and many more
+- These are just to run your code / build your project / etc
+- Libraries are worse
+- Angular(v1,v2), Vue, react, react-native, jQuery, UI5, redux, redux-saga, mobx, rxjs, backbone, ember, meteor, ionic, ... ∞
+- Thankfully, also *very* easy to get started (once you know how)
+- I will recommend a specific combination of tools
+*** Installation
+- Get chocolatey: https://www.chocolatey.org
+- Open powershell: `choco install yarn`
+- `choco install git`
+- Install VS Code(NB: pick explorer extensions)
+- Install extensions: typescript, eslint, prettier, intellicode(optional), javascript(optional)
+- In settings (Ctrl+,), find and enable format on save
+- Open powershell in your project folder, `git clone <this-repo>`
+** Basic react
+*** jsx
+ - Components are written in jsx
+ - Extension of js
+ - Mix of html of and js (kind of)
+ - Really just syntactic sugar
+*** components
+ A component is just a function that returns HTML
+ <example>
+*** jsx translation
+    <example>
+*** props
+- Components, like functions, can take arguments
+- In React, they're called props(properties)
+- Pass arguments via html attributes in JSX
+*** props
+- Components can have children
+- They're part of the props
+- And of course, you can use CSS for styling
+<example>
+*** Interactivity
+- Components can be interactive too
+- We'll explain in more detail in a bit
+<demo using useState>
+** How react works
+*** Virtual DOM
+- React maintains a virtual DOM
+- Keeps track of each components dependencies
+- When data changes, components are rerendered
+- Compares result to last result, does minimal work to update
+*** Old-style components
+- React components used to be classes
+- Can still be classes
+- New, better way is using functional components
+<classic component demo>
+<functional component demo>
+*** The React lifecycle & methods
+- A way to react to changes in data
+- Ex: When selected item changed, fetch new item from server
+- Different methods for different stages
+- Only allowed to do some things in some methods, other things in other methods
+- Won't cover in detail, replaced with hooks
+*** The React lifecycle & methods
+Simple version
+<react-lifecycle-simple>
+Full
+<react-lifecycle-full>
+*** The React lifecycle & methods
+- React's first design was too easy to misuse
+- Some lifecycle methods were worse than others
+- Some could/should be grouped into one
+- Some were almost never a good idea to use
+- Hard to reuse and compose
+- Hooks subsume all the old functionality
+** Hooks
+*** useState
+*** useEffect
+*** Composing hooks
+** Common patterns
+*** Run during first render
+*** Run every render
+*** React to changed props
+*** React to changed state
+*** 
+
