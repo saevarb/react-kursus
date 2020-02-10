@@ -1,11 +1,13 @@
 
 ul ul {
     margin-left: 32px;
+    /* font-size: 95%; */
 }
 li {
     font-family: "Montserrat";
-    font-size: 1em !important;
+    font-size: 0.8em !important;
     font-weight: 300 !important;
+    margin-top: 8px !important;
 }
 
 p {
@@ -17,11 +19,11 @@ p {
 
 .language-jsx {
     font-family: "Source Code Pro" !important;
-    font-size: 0.7em !important;
+    font-size: 1.4vmin !important;
 }
 
 .spectacle-content {
-    max-height: unset !important;
+    max-height: 100vh !important;
 }
 
 textarea {
@@ -31,9 +33,15 @@ textarea {
 h1,h2,h3,h4,h5,h6 {
     font-family: "Roboto" !important;
     font-weight: 500 !important;
+    text-transform: uppercase;
+}
+
+h5 {
+    color: white !important;
 }
 
 h6 {
+    color: lightslategray !important;
     font-weight: 400 !important;
 }
 
@@ -49,13 +57,25 @@ code.sample {
 }
 
 code.inline {
-    font-family: "Iosevka";
+    font-size: 90% !important;
+}
+
+li code {
+    font-size: 80% !important;
+}
+
+h6 code {
+    text-transform: none;
+}
+
+code.inline, li code, h6 code {
+    font-family: "Iosevka" !important;
     /* font-size: inherit; */
-    font-size: 90%;
     background-color: rgb(42, 39, 52);
     border-radius: 8px;
     padding: 0px 8px;
     border: 1px solid grey;
+    color: white !important;
 }
 
 

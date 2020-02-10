@@ -94,9 +94,7 @@
 *** Old-style components
 - React components used to be classes
 - Can still be classes
-- New, better way is using functional components
 <classic component demo>
-<functional component demo>
 *** The React lifecycle & methods
 - A way to react to changes in data
 - Ex: When selected item changed, fetch new item from server
@@ -116,6 +114,13 @@ Full
 - Hard to reuse and compose
 - Hooks subsume all the old functionality
 ** Hooks
+*** What are hooks
+- There are several different standard hooks
+- They all do different things and work differently ..
+- .. but they all follow the same set of rules
+- Hook rules
+  - You can call hooks in react components
+  - You can call hooks in custom hooks
 *** useState
 *** useEffect
 *** Composing hooks
@@ -124,5 +129,9 @@ Full
 *** Run every render
 *** React to changed props
 *** React to changed state
-*** 
+** Non-trivial applications
+*** State management
+- What does it even mean?
+- Why is it needed?
+- 
 

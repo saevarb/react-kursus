@@ -1,9 +1,13 @@
+const prettier = require("prettier");
+
 module.exports = function(args) {
     const exampleLines = [];
     let foundStart = false;
     let foundEnd = false;
     console.log("Example loader");
+    console.log(this.request);
     for(const line of args.split("\n")) {
+        console.log(line);
         if(line.indexOf("EXAMPLE START") !== -1) {
             foundStart = true;
             continue;
@@ -24,5 +28,13 @@ module.exports = function(args) {
     if(!foundStart || !foundEnd) {
         throw new Error("Did not find start and/or end of example");
     }
-    return exampleLines.join("\n");
+    const resultSource = exampleLines.join("\n");
+    const formatted = prettier.format(resultSource, {
+        printWidth: 50,
+        trailingComma: "all",
+        tabWidth: 2,
+        jsxBracketSameLine: false,
+        arrowParens: "always"
+    });
+    return formatted;
 }

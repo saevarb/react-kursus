@@ -50,18 +50,20 @@ export interface MyPlaygroundProps {
 
 export const Playground: React.FC<MyPlaygroundProps> = (props) => {
   return (
-    <ComponentPlayground
-      scope={{
-        useState,
-        useEffect,
-        mobx,
-        mutils,
-        observer,
-      }}
-      language="tsx"
-      code={props.code}
-      previewBackgroundColor="#464646"
-    />
+    <div style={{ marginTop: "16px" }}>
+      <ComponentPlayground
+        scope={{
+          useState,
+          useEffect,
+          mobx,
+          mutils,
+          observer,
+        }}
+        language="tsx"
+        code={props.code}
+        previewBackgroundColor="#464646"
+      />
+    </div>
   );
 };
 
