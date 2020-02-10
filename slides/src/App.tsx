@@ -177,10 +177,22 @@ const App = () => {
         <Headings heading="Basic react" subheading="JSX Translation" />
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1, marginRight: "16px" }}>
-            <code className="sample">{preJsxExample}</code>
+            <Markdown>
+              {`
+\`\`\`js
+${preJsxExample}
+\`\`\`
+              `}
+            </Markdown>
           </div>
           <div style={{ flex: 1 }}>
-            <code className="sample">{postJsxExample}</code>
+            <Markdown>
+              {`
+\`\`\`js
+${postJsxExample}
+\`\`\`
+              `}
+            </Markdown>
           </div>
         </div>
       </Slide>
@@ -370,15 +382,36 @@ const App = () => {
         </Markdown>
         <Playground code={useEffectExample2}></Playground>
       </Slide>
-      <Slide>
-        <Markdown>
-          {`
+      {MarkdownSlides`
 ##### Hooks
 ###### \`useEffect\`
-- Foo
+To conditionally perform an effect, put condition inside effect function
+
+Good
+\`\`\`js
+useEffect(() => {
+  if(props.user.id !== undefined) {
+    // fetch user data
+  }
+}, [props.user.id]);
+\`\`\`
+
+Bad
+\`\`\`js
+if(props.user.id !== undefined) {
+  useEffect(() => {
+    // fetch user data
+  }, [props.user.id]);
+}
+\`\`\`
+---
+##### Hooks
+###### \`useEffect\`
+- Summary
+  - \`useEffect(..)\` runs on every render
+  - \`useEffect(.., [])\` runs on first render
+  - \`useEffect(.., [a, b, c])\` runs when \`a\`, \`b\`, or \`c\` change
           `}
-        </Markdown>
-      </Slide>
     </Deck>
   );
 };
