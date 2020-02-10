@@ -58,6 +58,7 @@ export const Playground: React.FC<MyPlaygroundProps> = (props) => {
         mutils,
         observer,
       }}
+      language="tsx"
       code={props.code}
       previewBackgroundColor="#464646"
     />

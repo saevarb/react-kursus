@@ -356,7 +356,7 @@ module.exports = function(webpackEnv) {
               {
                   test: [/\.example$/],
                   loader: [require.resolve("raw-loader"),
-                           path.resolve("config/loaders/my-loader.js")
+                           path.resolve("config/loaders/example-loader.js")
                           ]
               },
             // "url" loader works like "file" loader except that it embeds assets

@@ -2,6 +2,7 @@ module.exports = function(args) {
     const exampleLines = [];
     let foundStart = false;
     let foundEnd = false;
+    console.log("Example loader");
     for(const line of args.split("\n")) {
         if(line.indexOf("EXAMPLE START") !== -1) {
             foundStart = true;
