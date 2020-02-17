@@ -18,6 +18,8 @@ import classComponentExample from "./examples/class_components.example";
 import useStateExample from "./examples/use_state.example";
 import useEffectExample1 from "./examples/use_effect1.example";
 import useEffectExample2 from "./examples/use_effect2.example";
+import contextExample from "./examples/context.example";
+import useContextExample from "./examples/use_context.example";
 
 // CSS
 import "./App.css";
@@ -25,6 +27,7 @@ import "./App.css";
 // Images
 import graph1 from "./graph1.png";
 import graph2 from "./graph2.png";
+import noBueno from "./no_bueno.png";
 import reactLifecycleSimple from "./react-lifecycle-simple.png";
 import reactLifecycleFull from "./react-lifecycle-full.png";
 
@@ -348,7 +351,7 @@ ${postJsxExample}
 - Side-effects are anything to do with the "outside world"
   - Fetching/sending data
   - Accessing local storage
-  - Dealing with the DOM (almost never necessary with react)
+
   - etc
       `}
       <Slide>
@@ -373,6 +376,7 @@ ${postJsxExample}
 - \`useEffect\`'s second(and optional) parameter are the effect's *dependencies*
 - When not used, the effect is run on every render
 - When used, react only runs the effect if any of the dependencies changed
+  - You can react to changes in state as well
 - Try the following
   - Open the console
   - Increase the counter by 1 and note the console messages
@@ -411,7 +415,106 @@ if(props.user.id !== undefined) {
   - \`useEffect(..)\` runs on every render
   - \`useEffect(.., [])\` runs on first render
   - \`useEffect(.., [a, b, c])\` runs when \`a\`, \`b\`, or \`c\` change
+---
+##### State management
+###### The (first) problem
+- Some data needs to be accessed by many different components
+- Example structure
+  - Navbar
+    - User info
+  - Main content
+    - Settings page with user info
+- Where do we store data, like the user info?
+---
+##### State management
+###### Initial solution
+- Hoist all state to top
+- Pass everything everywhere via props
+- "Prop drilling"
+- Extremely tedious and results in bad architecture
+  - We have \`X > Y > Z\`
+  - \`Z\` needs data from \`X\`, \`Y\` doesn't
+  - We pass it through \`Y\`
+  - Changes in \`X\` or \`Z\` might require changes in \`Y\`
+  - No bueno
           `}
+      <Slide>
+        <Markdown>{`
+##### State management
+###### Initial solution
+           `}</Markdown>
+        <Image src="https://miro.medium.com/max/818/1*xyCZoj-zdIYVUVT71Y_9qw.png"></Image>
+      </Slide>
+      <Slide>
+        <Markdown>
+          {`
+##### State management
+###### \`Context\`, \`Provider\` & \`Consumer\`
+- A \`Context\` is kind of like a global variable, except
+  - .. you can restrict its scope
+  - .. it can have different values in different subtrees
+- You "provide" the value using a \`Provider\` component
+- You "consume" the value using a \`Consumer\` component
+  - Value is from closest \`Provider\` above it
+  - If no \`Provider\` above, use default value
+      `}
+        </Markdown>
+        <Playground code={contextExample}></Playground>
+      </Slide>
+      <Slide>
+        <Markdown>
+          {`
+##### State management
+###### \`useContext\`
+- Using \`Consumer\` is kind of awkward
+- Thankfully, hooks!
+      `}
+        </Markdown>
+        <Playground code={useContextExample}></Playground>
+      </Slide>
+      {MarkdownSlides`
+##### State management
+###### The (second) problem
+- Non-trivial app ⟶ non-trivial state
+- Non-trivial state usually means many levels of nesting
+- Updating must be done correctly due to immutability
+  - Can also get awkward and tedious
+
+\`\`\`js
+{
+    foo: {
+        bar: {
+            baz: {
+                // ..
+            }
+        }
+    }
+}
+\`\`\`
+---
+##### State management
+###### Solutions
+- \`redux\` is probably most popular
+- Popular for good reasons, but..
+  - .. *lots* of boilerplate
+  - .. very invasive
+  - .. very opinionated
+  - .. complicated to learn
+- IMHO, there are better solutions: \`mobx\`
+---
+##### State management
+###### \`mobx\` & \`mobx-react\`
+- Based on reactive programming ideas
+- Think "reacting to change automagically"
+- It's all about \`Observable\`s
+---
+##### State management
+###### Observables
+- If \`Promise\` represents zero or a single value ..
+- .. then \`Observable\` represents zero or more values
+- IOW, \`Observable\` is a value that can change whose changes you can observe
+- IOW, a stream of values
+      `}
     </Deck>
   );
 };

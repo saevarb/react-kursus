@@ -123,15 +123,21 @@ Full
   - You can call hooks in custom hooks
 *** useState
 *** useEffect
-*** Composing hooks
-** Common patterns
-*** Run during first render
-*** Run every render
-*** React to changed props
-*** React to changed state
-** Non-trivial applications
-*** State management
-- What does it even mean?
-- Why is it needed?
-- 
-
+*** TODO Composing hooks / custom hooks
+** State management
+*** The problem
+- Some data needs to be accessed by many different components
+- Example structure
+  - Navbar
+    - User info
+  - Main content
+    - Settings page with user info
+- Where do we store data, like the user info?
+*** Initial solution
+- Hoist all state to top
+- Pass everything everywhere via props
+- "Prop drilling"
+- Extremely tedious and results in bad architecture
+  - We have `X > Y > Z`
+  - `Z` needs data from `X`, `Y` doesn't
+  - We pass it through `Y`
