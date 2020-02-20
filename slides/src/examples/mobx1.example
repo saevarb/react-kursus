@@ -1,0 +1,56 @@
+import React from "react";
+
+// EXAMPLE START
+
+class Counter {
+  @observable
+  value = 0;
+}
+const counter = mobx.observable({
+  nested: {
+    value: 0,
+  },
+});
+
+const Demo = observer(() => {
+  useEffect(() => {
+    const blah = setInterval(() => {
+      console.log(counter.nested.value);
+      counter.nested.value += 1;
+    }, 1000);
+    return () => clearInterval(blah);
+  });
+  return (
+    <div>
+      <ObserverComp counter={counter.nested}></ObserverComp>
+      <NonObserverComp counter={counter.nested}></NonObserverComp>
+    </div>
+  );
+});
+
+const ObserverComp = observer((props) => {
+  return (
+    <div>
+      Observer <ObserverNumber value={props.counter.value}></ObserverNumber>
+    </div>
+  );
+});
+
+const ObserverNumber = observer((props) => {
+  return <div style={{ fontSize: "2em" }}>{props.value}</div>;
+});
+
+const NonObserverComp = (props) => {
+  return (
+    <div>
+      NonObserver <NonObserverNumber value={props.counter.value}></NonObserverNumber>
+    </div>
+  );
+};
+
+const NonObserverNumber = (props) => {
+  return <div style={{ fontSize: "2em" }}>{props.value}</div>;
+};
+
+render(<Demo />);
+// EXAMPLE END

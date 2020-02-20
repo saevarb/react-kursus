@@ -20,6 +20,7 @@ import useEffectExample1 from "./examples/use_effect1.example";
 import useEffectExample2 from "./examples/use_effect2.example";
 import contextExample from "./examples/context.example";
 import useContextExample from "./examples/use_context.example";
+import mobxExample1 from "./examples/mobx1.example";
 
 // CSS
 import "./App.css";
@@ -30,6 +31,13 @@ import graph2 from "./graph2.png";
 import noBueno from "./no_bueno.png";
 import reactLifecycleSimple from "./react-lifecycle-simple.png";
 import reactLifecycleFull from "./react-lifecycle-full.png";
+
+mobx.configure({
+  enforceActions: "always",
+  computedRequiresReaction: true,
+  observableRequiresReaction: true,
+  reactionRequiresObservable: true,
+});
 
 const theme = createTheme(
   {
@@ -340,7 +348,7 @@ ${postJsxExample}
 - Not using \`prevState\` parameter risks race condition
 - The \`prevState\` parameter will always be up to date
 
-`}
+              `}
         </Markdown>
         <Playground code={useStateExample}></Playground>
       </Slide>
@@ -364,7 +372,7 @@ ${postJsxExample}
   - Effects that don't require cleanup(sending a HTTP request)
 - \`useEffect\`'s first parameter is a function where you perform your side-effect
 - If it requires cleanup, function should return a function to perform cleanup
-          `}
+              `}
         </Markdown>
         <Playground code={useEffectExample1}></Playground>
       </Slide>
@@ -382,7 +390,7 @@ ${postJsxExample}
   - Increase the counter by 1 and note the console messages
   - Decreate it to zero again and note the console messages
   - While still zero, reset to zero again
-          `}
+              `}
         </Markdown>
         <Playground code={useEffectExample2}></Playground>
       </Slide>
@@ -437,12 +445,12 @@ if(props.user.id !== undefined) {
   - We pass it through \`Y\`
   - Changes in \`X\` or \`Z\` might require changes in \`Y\`
   - No bueno
-          `}
+      `}
       <Slide>
         <Markdown>{`
 ##### State management
 ###### Initial solution
-           `}</Markdown>
+              `}</Markdown>
         <Image src="https://miro.medium.com/max/818/1*xyCZoj-zdIYVUVT71Y_9qw.png"></Image>
       </Slide>
       <Slide>
@@ -457,7 +465,7 @@ if(props.user.id !== undefined) {
 - You "consume" the value using a \`Consumer\` component
   - Value is from closest \`Provider\` above it
   - If no \`Provider\` above, use default value
-      `}
+              `}
         </Markdown>
         <Playground code={contextExample}></Playground>
       </Slide>
@@ -468,7 +476,7 @@ if(props.user.id !== undefined) {
 ###### \`useContext\`
 - Using \`Consumer\` is kind of awkward
 - Thankfully, hooks!
-      `}
+              `}
         </Markdown>
         <Playground code={useContextExample}></Playground>
       </Slide>
@@ -503,17 +511,97 @@ if(props.user.id !== undefined) {
 - IMHO, there are better solutions: \`mobx\`
 ---
 ##### State management
-###### \`mobx\` & \`mobx-react\`
+###### Why mobx
+- Not very opinionated or invasive
+- We can use basically any kind of architecture
+- MVC, MVVM, MVP, \`<insert buzzword here>\`, etc
+- Based on very solid abstractions
+  - \`mobx\` is built on \`rxjs\`
+  - [ReactiveX](http://reactivex.io/languages.html) exists for nearly any programming language
+---
+##### mobx & mobx-react
+###### Observables
 - Based on reactive programming ideas
 - Think "reacting to change automagically"
-- It's all about \`Observable\`s
----
-##### State management
-###### Observables
 - If \`Promise\` represents zero or a single value ..
 - .. then \`Observable\` represents zero or more values
 - IOW, \`Observable\` is a value that can change whose changes you can observe
 - IOW, a stream of values
+      `}
+      <Slide>
+        <Markdown>
+          {`
+##### mobx & mobx-react
+###### mobx + react
+- Components can be made "observers" automatically
+- Observers update automatically if
+  - They depend on observables
+  - And the observables change
+- This happens at the most granular level possible
+  - Only *exactly* the components needed are re-rendered on change
+  - This encourages many small observer components
+  - Many is good, not bad
+          `}
+        </Markdown>
+      </Slide>
+      {MarkdownSlides`
+##### TypeScript
+- TypeScript is just a type system on top of JavaScript
+- TypeScript is compiled to JavaScript
+- All JS code is valid TS code (modulo typechecking)
+- Strictness can be configured
+  - For the true JS experience, \`"strict": false\` (but don't do this)
+  - Just do \`"noImplicitAny": false\` and write JS
+  - .. but still get all the benefits of TS
+---
+##### TypeScript
+###### Quick primer
+- Compiling TS to JS is just removing TS types
+- TS types only exist at compile-time
+- \`typeof\` in JS at runtime *does not* return TS types
+  - TS types only exist at compile time -- remember this
+---
+##### TypeScript
+###### Quick primer
+- TS will automatically infer types if it can
+  - \`let user = "John"\` TS infers type \`string\`
+  - \`let count = 3\`  TS infers type \`number\`
+- You can also explicitly specify types
+  - \`const user: string = "John"\` This is fine
+  - \`const user: string = 3\` -> \`Type '3' is not assignable to type 'string'.\`
+- Wait, what? \`Type '3'\`?
+  - TS supports literal types
+  - Literal types means that a value \`X\` has the *same type* as its value(\`X\`)
+  - This may seem strange but is very powerful and useful
+---
+##### TypeScript
+###### Playground
+- https://www.typescriptlang.org/play/
+- Function types
+- Custom types
+- Union types
+- Object types
+- Null checking
+- Discriminated unions
+---
+##### TypeScript
+###### Benefits
+- Null checking
+- Type inference
+- Type narrowing
+- Discriminated unions
+- Auto-completion
+- Safety in other ways
+- All modern JS features
+---
+##### Application structure
+- \`mobx\` lets you mostly do what you want
+- I often use this pattern which is based on examples in \`mobx\` docs
+- \`RootStore\` contains all other stores and services
+- Each child store has reference to root store
+  - To access services
+  - To access other stores
+- We use \`Context\` to pass the root store down the component tree
       `}
     </Deck>
   );

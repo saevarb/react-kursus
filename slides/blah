@@ -1,0 +1,33 @@
+yarn run v1.22.0
+$ node scripts/start.js
+[34mℹ[39m [90m｢wds｣[39m: Project is running at http://192.168.123.100/
+[34mℹ[39m [90m｢wds｣[39m: webpack output is served from /
+[34mℹ[39m [90m｢wds｣[39m: Content not from webpack is served from /home/sbrg/repos/work/react-kursus/slides/public
+[34mℹ[39m [90m｢wds｣[39m: 404s will fallback to /index.html
+Starting the development server...
+
+Example loader
+/home/sbrg/repos/work/react-kursus/slides/src/example-loader.js!/home/sbrg/repos/work/react-kursus/slides/src/examples/hello_world.example.tsx
+import React from "react";
+
+// EXAMPLE START
+const HelloWorld = () => {
+  return <div>Hello!</div>;
+};
+
+render(<HelloWorld />);
+// EXAMPLE END
+
+Failed to compile.
+
+/home/sbrg/repos/work/react-kursus/slides/src/App.tsx
+TypeScript error in /home/sbrg/repos/work/react-kursus/slides/src/App.tsx(22,31):
+Cannot find module '!./example-loader!./examples/hello_world.example'.  TS2307
+
+    20 | // Examples
+    21 | 
+  > 22 | import HelloWorldExample from "!./example-loader!./examples/hello_world.example";
+       |                               ^
+    23 | import basicProps from "raw-loader!./examples/basic_props.example";
+    24 | import childrenExample from "raw-loader!./examples/children.example";
+    25 | import preJsxExample from "raw-loader!./examples/pre_jsx.example";
