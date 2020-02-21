@@ -1,6 +1,6 @@
 import {
   ImgurService,
-  GalleryReponse,
+  GalleryResponse,
   ImgurResponse
 } from "../services/ImgurService";
 import { RootStore } from "./RootStore";
@@ -8,26 +8,27 @@ import { observable, flow, computed } from "mobx";
 
 export class ImgurStore {
   @observable
-  public galleries: Map<string, Map<string, GalleryReponse>> = new Map();
+  public galleries: Map<string, Map<string, GalleryResponse>> = new Map();
 
   constructor(private rootStore: RootStore) {}
 
   loadGallery = flow(function* loadGallery(this: ImgurStore, name: string) {
     const imgur = this.rootStore.services.imgurService;
-    const result: ImgurResponse<GalleryReponse> = yield imgur.fetchGallery(
+    const result: ImgurResponse<GalleryResponse> = yield imgur.fetchGallery(
       name
     );
 
+    // Check to see if this gallery is loaded already
     const gallery = this.galleries.get(name);
 
-    if (gallery != undefined) {
+    if (gallery !== undefined) {
       // We have already loaded this gallery before. Update it instead of creating a new one
       for (const response of result.data) {
         gallery.set(response.id, response);
       }
     } else {
       // We haven't loaded this gallery before. Create a new one, fill it and insert into galleries
-      const newGallery: Map<string, GalleryReponse> = new Map();
+      const newGallery: Map<string, GalleryResponse> = new Map();
       for (const response of result.data) {
         newGallery.set(response.id, response);
       }

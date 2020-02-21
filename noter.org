@@ -141,3 +141,13 @@ Full
   - We have `X > Y > Z`
   - `Z` needs data from `X`, `Y` doesn't
   - We pass it through `Y`
+
+* Links
+- quicktype.io
+- typescript playground
+- mobx tutorial
+- typescript in 5 minutes
+- mobx egghead
+- mobx api reference
+- material ui
+- react hot loader

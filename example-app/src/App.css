@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
-}
+/* #content { */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   background-color: grey; */
+/*   display: grid; */
+/*   grid-template-columns: 20% auto; */
+/*   padding: 32px; */
+/* } */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* .sidebar { */
+/*   grid-column: 1; */
+/*   display: grid; */
+/*   grid-template-rows: 30% auto; */
+/* } */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* .main { */
+/*   grid-column: 2; */
+/* } */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* .gallery-controller { */
+/*   grid-row: 1; */
+/* } */
 
-.App-link {
-  color: #61dafb;
-}
+/* .gallery-list { */
+/*   grid-row: 2; */
+/* } */
 
-@keyframes App-logo-spin {
+.logo {
+  animation: spin infinite 1s linear;
+  width: 32px;
+}
+@keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate3d(0, 0, 0, 0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate3d(1, 1, 1, 360deg);
+    filter: hue-rotate(360deg);
   }
 }
