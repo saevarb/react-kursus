@@ -78,4 +78,5 @@ const AppearingListComponent: React.FC = (props) => {
   );
 };
 
-export const AppearingList = List;
+/* export const AppearingList = List; */
+export const AppearingList = AppearingListComponent;

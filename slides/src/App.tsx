@@ -70,14 +70,18 @@ const App = () => {
     <Deck transition={["slide"]} theme={theme}>
       <TitleSlide />
       <Slide>
-        <Headings heading="React" />
-        <AppearingList>
-          <ListItem>Created in 2013 by Facebook</ListItem>
-          <ListItem>Declarative, component-based (vs imperative)</ListItem>
-          <ListItem>Based on functional programming principles</ListItem>
-          <ListItem>Cross-platform (browser, mobile, etc)</ListItem>
-          <ListItem>Extremely popular, massive ecosystem</ListItem>
-        </AppearingList>
+        <Markdown>
+          {`
+##### React
+- Created in 2013 by Facebook
+- Declarative, data-driven, component-based (vs imperative)
+  - Instead of updating the UI directly, you update your data
+  - Changes in data automatically trigger a re-render
+- Based on functional programming principles
+- Cross-platform (browser, mobile, etc)
+- Extremely popular, massive ecosystem
+          `}
+        </Markdown>
       </Slide>
       <Slide>
         <Headings heading="React vs others" />
@@ -161,7 +165,7 @@ const App = () => {
             </List>
           </ListItem>
           <ListItem>In settings (Ctrl+,), find and enable format on save</ListItem>
-          <ListItem>Chrome/Firefox: Install react developer tools</ListItem>
+          <ListItem>Chrome/Firefox: Install React developer tools & mobx developer tools</ListItem>
           <ListItem>
             Open powershell in your project
             <code className="inline">git clone this-repo</code>
@@ -170,14 +174,13 @@ const App = () => {
       </Slide>
       <Slide>
         <Headings heading="Basic react" subheading="JSX" />
-
         <AppearingList>
+          <ListItem>Components are kind of just functions that return HTML</ListItem>
           <ListItem>Components are written in JSX</ListItem>
           <ListItem>Extension of JS</ListItem>
           <ListItem>Mix of HTML and JS(kind of)</ListItem>
           <ListItem>Really just syntactic sugar</ListItem>
         </AppearingList>
-
         <Appear>
           <div>
             <Playground code={helloWorld} />
@@ -359,7 +362,6 @@ ${postJsxExample}
 - Side-effects are anything to do with the "outside world"
   - Fetching/sending data
   - Accessing local storage
-
   - etc
       `}
       <Slide>
@@ -523,10 +525,11 @@ if(props.user.id !== undefined) {
 ###### Observables
 - Based on reactive programming ideas
 - Think "reacting to change automagically"
-- If \`Promise\` represents zero or a single value ..
-- .. then \`Observable\` represents zero or more values
-- IOW, \`Observable\` is a value that can change whose changes you can observe
-- IOW, a stream of values
+- \`Observable\`
+  - If \`Promise\` represents zero or a single value ..
+  - .. then \`Observable\` represents zero or more values
+  - IOW, \`Observable\` is a value that can change whose changes you can observe
+  - IOW, a stream of values
       `}
       <Slide>
         <Markdown>
