@@ -35,8 +35,10 @@ export interface GalleryReponse {
 export class ImgurService {
   constructor(private apiKey: string) {}
 
-  fetchGallery = async (): Promise<ImgurResponse<GalleryReponse>> => {
-    const res = await fetch("https://api.imgur.com/3/gallery.json", {
+  fetchGallery = async (
+    name: string
+  ): Promise<ImgurResponse<GalleryReponse>> => {
+    const res = await fetch(`https://api.imgur.com/3/gallery/${name}`, {
       headers: {
         Authorization: `Client-ID ${this.apiKey}`
       }

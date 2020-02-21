@@ -4,6 +4,7 @@ import { Stores } from "./stores";
 import { RootStore } from "./stores/RootStore";
 import { UIStore } from "./stores/UIStore";
 import { ImgurService } from "./services/ImgurService";
+import { ImgurStore } from "./stores/ImgurStore";
 
 const clientId: string = "043ca82ed4e9ba9";
 
@@ -18,7 +19,8 @@ function initializeServices(): Services {
 // and each individual store has to know about the root store
 function initializeStores(x: RootStore): Stores {
   return {
-    uiStore: new UIStore(x)
+    uiStore: new UIStore(x),
+    imgurStore: new ImgurStore(x)
   };
 }
 
